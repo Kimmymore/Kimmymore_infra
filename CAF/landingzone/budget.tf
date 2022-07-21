@@ -9,8 +9,8 @@ resource "azurerm_monitor_action_group" "budget_action_group" {
   short_name          = "budgAction"
 
   email_receiver {
-    name          = "sendToFlynth"
-    email_address = "servicedeskflynth@stepco.nl"
+    name          = "sendToKim"
+    email_address = "kim.willemse@cloudnation.nl"
   }
 }
 

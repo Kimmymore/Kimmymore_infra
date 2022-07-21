@@ -4,62 +4,12 @@ locals {
   }
 
   custom_landing_zones = {
-    "${var.root_id}-online" = {
-      display_name               = "Online"
+    "${var.root_id}-Kimmymore" = {
+      display_name               = "Kimmymore"
       parent_management_group_id = "${var.root_id}-landing-zones"
       subscription_ids           = []
       archetype_config = {
-        archetype_id   = "online"
-        parameters     = {}
-        access_control = {}
-      }
-    }
-    "${var.root_id}-digitaldatacenter" = {
-      display_name               = "DigitalDataCenter"
-      parent_management_group_id = "${var.root_id}-landing-zones"
-      subscription_ids           = []
-      archetype_config = {
-        archetype_id   = "digitaldatacenter"
-        parameters     = {}
-        access_control = {}
-      }
-    }
-    "${var.root_id}-azurevd" = {
-      display_name               = "AzureVD"
-      parent_management_group_id = "${var.root_id}-landing-zones"
-      subscription_ids           = []
-      archetype_config = {
-        archetype_id   = "azurevd"
-        parameters     = {}
-        access_control = {}
-      }
-    }
-    "${var.root_id}-office" = {
-      display_name               = "Office"
-      parent_management_group_id = "${var.root_id}-landing-zones"
-      subscription_ids           = []
-      archetype_config = {
-        archetype_id   = "office"
-        parameters     = {}
-        access_control = {}
-      }
-    }
-    "${var.root_id}-dms" = {
-      display_name               = "DMS"
-      parent_management_group_id = "${var.root_id}-landing-zones"
-      subscription_ids           = []
-      archetype_config = {
-        archetype_id   = "dms"
-        parameters     = {}
-        access_control = {}
-      }
-    }
-    "${var.root_id}-fds" = {
-      display_name               = "FDS"
-      parent_management_group_id = "${var.root_id}-landing-zones"
-      subscription_ids           = []
-      archetype_config = {
-        archetype_id   = "fds"
+        archetype_id   = "Kimmymore"
         parameters     = {}
         access_control = {}
       }
@@ -92,7 +42,7 @@ locals {
       security_center = {
         enabled = true
         config = {
-          email_security_contact             = "servicedeskflynth@stepco.nl"
+          email_security_contact             = "kim.willemse@cloudnation.nl"
           enable_defender_for_acr            = true
           enable_defender_for_app_services   = true
           enable_defender_for_arm            = true

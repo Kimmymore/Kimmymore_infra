@@ -20,12 +20,12 @@ variable "workload_name" {
 
 variable "owner" {
   type = string
-  default = "servicedeskflynth@stepco.nl"
+  default = "Kim Willemse"
 }
 
 variable "deployed_by" {
   type = string
-  default = "Jorrit Stutterheim"
+  default = "Kim Willemse"
 }
 
 variable "foundation_ip_range" {

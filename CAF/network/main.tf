@@ -40,8 +40,8 @@ resource "azurerm_resource_group" "rg_vwan_network" {
   tags = {
     "WorkloadName" = "hub_networking",
     "Environment" = "prd",
-    "Owner" = "support@cloudnation.nl",
-    "DeployedBy" = "Jorrit Stutterheim"
+    "Owner" = "Kim Willemse",
+    "DeployedBy" = "Kim Willemse"
   }
 }
 
@@ -51,7 +51,7 @@ resource "azurerm_resource_group" "rg-vwan-fw-policy" {
   tags = {
     "WorkloadName" = "firewall_policies",
     "Environment" = "prd",
-    "Owner" = "support@cloudnation.nl",
-    "DeployedBy" = "Jorrit Stutterheim"
+    "Owner" = "Kim Willemse",
+    "DeployedBy" = "Kim Willemse"
   }
 }

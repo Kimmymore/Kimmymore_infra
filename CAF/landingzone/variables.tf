@@ -4,7 +4,7 @@ variable "location" {
 }
 
 variable "DeployedBy" {
-  default = "jorrit.stutterheim@cloudnation.nl"
+  default = "Kim Willemse"
   type    = string
 }
 

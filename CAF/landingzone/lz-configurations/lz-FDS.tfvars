@@ -1,13 +1,13 @@
 # Will this landing zone contain VM workloads (recovery service vault deployed)
 vm_workloads = true
 # Contact person / requestor of the new landing zone
-owner = "marc.zijlstra@flynth.nl"
+owner = "Kim Willemse"
 
 # Budget alerts will be send to the following recipients, owner will be added automatically
-budget_alert_recipients = ["servicedeskflynth@stepco.nl"]
+budget_alert_recipients = ["kim.willemse@cloudnation.nl"]
 
 # Name will be used in Azure resource naming, may not contain spaces
-workload_name = "fds"
+workload_name = "Kimmymore"
 environment = "prd"
 
 # Azure Vnet Sizing

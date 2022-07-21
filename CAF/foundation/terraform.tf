@@ -48,7 +48,7 @@ provider "azurerm" {
 }
 
 provider "azurerm" {
-  alias           = "fds"
+  alias           = "Kimmymore"
   subscription_id = "2ce5d158-b783-4da7-9022-11f0be6e8dcb"
   features {}
 }

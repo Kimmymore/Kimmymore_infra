@@ -31,6 +31,6 @@ variable "workload_name" {
 }
 
 variable "owner" {
-  default = "support@cloudnation.nl"
+  default = "Kim Willemse"
   type = string
 }

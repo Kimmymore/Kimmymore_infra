@@ -1,12 +1,12 @@
-data "azurerm_management_group" "fds" {
-  name = "flynth-fds"
+data "azurerm_management_group" "Kimmymore" {
+  name = "mgmtgroup-Kimmymore"
 }
 
-data "azurerm_subscription" "fds" {
-    provider = azurerm.fds
+data "azurerm_subscription" "Kimmymore" {
+    provider = azurerm.Kimmymore
 }
 
-resource "azurerm_management_group_subscription_association" "lz_fds_assoc" {
-  management_group_id = data.azurerm_management_group.fds.id
-  subscription_id     = data.azurerm_subscription.fds.id
+resource "azurerm_management_group_subscription_association" "lz_Kimmymore_assoc" {
+  management_group_id = data.azurerm_management_group.Kimmymore.id
+  subscription_id     = data.azurerm_subscription.Kimmymore.id
 }

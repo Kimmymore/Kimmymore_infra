@@ -18,5 +18,5 @@ EOT
 }
 
 variable "project_owner" {
-  default = "bjorn@augmented.cloud"
+  default = "kim.willemse@cloudnation.nl"
 }

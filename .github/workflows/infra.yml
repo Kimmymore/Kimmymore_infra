@@ -1,0 +1,128 @@
+name: 'Infrastructure'
+
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+      terraform_action:
+          description: 'Terraform action'
+          required: true
+          default: 'plan'
+          type: choice
+          options:
+          - 'plan'
+          - 'apply'
+          - 'destroy'
+      workfolder:
+          description: 'Terraform workfolder'
+          required: true
+          type: choice
+          options:
+          - 'infra/foundation'
+          - 'infra/landingzone'
+          - 'infra/network'
+      lz_name:
+          description: 'Landing Zone name'
+          required: true
+          type: choice
+          options:
+          - 'FDS'
+      environment:
+          description: 'Environment'
+          required: true
+          type: choice
+          options:
+          - 'prd'
+
+jobs:
+  infrastructure:
+    name: '${{ github.event.inputs.workfolder }}'
+    runs-on: ubuntu-20.04
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      TF_IN_AUTOMATION: "nonempty"
+    environment: ${{ github.event.inputs.environment }}
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ github.event.inputs.workfolder }}
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v2
+
+
+    # Install the latest version of Terraform CLI.
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        # To be able to use output variable in the pipeline
+        terraform_wrapper: false
+
+    - name: Terraform Init and Plan
+      run: |
+        work_folder="${{ github.event.inputs.workfolder }}"
+        lz_name="${{ github.event.inputs.lz_name }}"
+        env="${{ github.event.inputs.environment }}"
+        key="${{ github.event.inputs.workfolder }}"
+        backend_file="backend-$env.cfg"
+
+        if [ $work_folder == "infra/landingzone" ];
+        then
+            var_file="./lz-configurations/lz-$lz_name.tfvars"
+            key="${{ github.event.inputs.workfolder }}/$lz_name.$env"
+            terraform init -backend-config $backend_file -backend-config="key=$key"
+            terraform plan -var-file $var_file
+        else
+            terraform init -backend-config $backend_file
+            terraform plan
+        fi
+
+    #   # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
+    - if: github.event.inputs.terraform_action == 'apply'
+      name: Terraform Apply
+      run: |
+        work_folder="${{ github.event.inputs.workfolder }}"
+        lz_name="${{ github.event.inputs.lz_name }}"
+        env="${{ github.event.inputs.environment }}"
+        key="${{ github.event.inputs.workfolder }}"
+        backend_file="backend-$env.cfg"
+
+        if [ $work_folder == "infra/landingzone" ];
+        then
+            var_file="./lz-configurations/lz-$lz_name.tfvars"
+            terraform apply -var-file $var_file -auto-approve
+        else
+            terraform apply -auto-approve
+        fi
+
+    - if: github.event.inputs.terraform_action == 'destroy'
+      name: Terraform Destroy
+      run: |
+        work_folder="${{ github.event.inputs.workfolder }}"
+        lz_name="${{ github.event.inputs.lz_name }}"
+        env="${{ github.event.inputs.environment }}"
+        key="${{ github.event.inputs.workfolder }}"
+        backend_file="backend-$env.cfg"
+
+        if [ $work_folder == "infra/landingzone" ];
+        then
+            var_file="./lz-configurations/lz-$lz_name.tfvars"
+            terraform destroy -var-file $var_file -auto-approve
+        else
+            terraform destroy -auto-approve
+        fi

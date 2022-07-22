@@ -28,7 +28,6 @@ provider "azurerm" {
   subscription_id = "8f96df25-1520-42ea-8a60-4a32c86cc31b"
 }
 
-
 provider "azurerm" {
   alias           = "management"
   subscription_id = "8f96df25-1520-42ea-8a60-4a32c86cc31b"

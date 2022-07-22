@@ -37,7 +37,7 @@ module "enterprise_scale" {
   disable_telemetry = true
 
   # Configuration settings for identity resources
-  deploy_identity_resources     = true
+  deploy_identity_resources     = false
   subscription_id_identity      = data.azurerm_client_config.identity.subscription_id
   configure_identity_resources  = local.configure_identity_resources
 
@@ -48,11 +48,11 @@ module "enterprise_scale" {
 
 
   # Configuration settings for management resources
-  deploy_management_resources    = true
+  deploy_management_resources    = false
   configure_management_resources = local.configure_management_resources
   subscription_id_management     = data.azurerm_client_config.management.subscription_id
 
-  deploy_core_landing_zones = true
-  deploy_online_landing_zones = true
+  deploy_core_landing_zones = false
+  deploy_online_landing_zones = false
   custom_landing_zones = local.custom_landing_zones
 }

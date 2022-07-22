@@ -2,12 +2,12 @@
 
 variable "root_id" {
   type    = string
-  default = "flynth"
+  default = "Kimmymore"
 }
 
 variable "root_name" {
   type    = string
-  default = "Flynth"
+  default = "Kimmymore"
 }
 
 variable "management_root_group_id" {

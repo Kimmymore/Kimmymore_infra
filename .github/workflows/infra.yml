@@ -27,14 +27,16 @@ on:
           type: choice
           options:
           - 'infra/foundation'
+          - 'infra/identity_subscription'
           - 'infra/landingzone'
+          - 'infra/management_subscription'
           - 'infra/network'
       lz_name:
           description: 'Landing Zone name'
           required: true
           type: choice
           options:
-          - 'FDS'
+          - 'Kimmymore'
       environment:
           description: 'Environment'
           required: true
